@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<!-- saved from url=(0065)http://blog.modulus.io/node.js-tutorial-how-to-use-request-module -->
+<html lang="en"><head><style>.hs-cta-wrapper p, .hs-cta-wrapper div { margin: 0; padding: 0; } a#cta_button_391263_e7d963b6-0702-4e31-86d2-43d2899a42d1 {
+  -webkit-font-smoothing:antialiased; 
+  cursor:pointer; 
+  -moz-user-select:none; 
+  -webkit-user-select:none; 
+  -o-user-select:none; 
+  user-select:none; 
+  display:inline-block; 
+  font-weight:bold; 
+  text-align:center; 
+  text-decoration:none; 
+  font-family:sans-serif; 
+  background:rgb(255,78,0); 
+  color:rgb(255, 255, 255); 
+  border:2px solid rgb(127,39,0); 
+  text-shadow:0px -1px rgb(76,23,0); 
+  line-height:1.5em; 
+  padding:5px 10px; 
+border: none;
+text-shadow: none;}
+a#cta_button_391263_e7d963b6-0702-4e31-86d2-43d2899a42d1:hover {
+background:rgb(255,85,0); 
+color:rgb(255,255,255); 
+}
+a#cta_button_391263_e7d963b6-0702-4e31-86d2-43d2899a42d1:active, #cta_button_391263_e7d963b6-0702-4e31-86d2-43d2899a42d1:active:hover {
+background:rgb(204,62,0); 
+color:rgb(244,244,244); 
+}
+
+</style><style>.hs-cta-wrapper p, .hs-cta-wrapper div { margin: 0; padding: 0; } a#cta_button_391263_2b3961db-efe4-4a56-aa80-6e7a29269c49 {
+  -webkit-font-smoothing:antialiased; 
+  cursor:pointer; 
+  -moz-user-select:none; 
+  -webkit-user-select:none; 
+  -o-user-select:none; 
+  user-select:none; 
+  display:inline-block; 
+  font-weight:bold; 
+  text-align:center; 
+  text-decoration:none; 
+  font-family:sans-serif; 
+  background:rgb(255,78,0); 
+  color:rgb(255, 255, 255); 
+  border:2px solid rgb(127,39,0); 
+  text-shadow:0px -1px rgb(76,23,0); 
+  line-height:1.5em; 
+  padding:5px 10px; 
+border: none;
+text-shadow: none;}
+a#cta_button_391263_2b3961db-efe4-4a56-aa80-6e7a29269c49:hover {
+background:rgb(255,85,0); 
+color:rgb(255,255,255); 
+}
+a#cta_button_391263_2b3961db-efe4-4a56-aa80-6e7a29269c49:active, #cta_button_391263_2b3961db-efe4-4a56-aa80-6e7a29269c49:active:hover {
+background:rgb(204,62,0); 
+color:rgb(244,244,244); 
+}
+
+</style><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>.hs-cta-wrapper p, .hs-cta-wrapper div { margin: 0; padding: 0; } a#cta_button_391263_2b3961db-efe4-4a56-aa80-6e7a29269c49 {
+  -webkit-font-smoothing:antialiased; 
+  cursor:pointer; 
+  -moz-user-select:none; 
+  -webkit-user-select:none; 
+  -o-user-select:none; 
+  user-select:none; 
+  display:inline-block; 
+  font-weight:bold; 
+  text-align:center; 
+  text-decoration:none; 
+  font-family:sans-serif; 
+  background:rgb(255,78,0); 
+  color:rgb(255, 255, 255); 
+  border:2px solid rgb(127,39,0); 
+  text-shadow:0px -1px rgb(76,23,0); 
+  line-height:1.5em; 
+  padding:5px 10px; 
+border: none;
+text-shadow: none;}
+a#cta_button_391263_2b3961db-efe4-4a56-aa80-6e7a29269c49:hover {
+background:rgb(255,85,0); 
+color:rgb(255,255,255); 
+}
+a#cta_button_391263_2b3961db-efe4-4a56-aa80-6e7a29269c49:active, #cta_button_391263_2b3961db-efe4-4a56-aa80-6e7a29269c49:active:hover {
+background:rgb(204,62,0); 
+color:rgb(244,244,244); 
+}
+
+</style><style>.hs-cta-wrapper p, .hs-cta-wrapper div { margin: 0; padding: 0; } a#cta_button_391263_e7d963b6-0702-4e31-86d2-43d2899a42d1 {
+  -webkit-font-smoothing:antialiased; 
+  cursor:pointer; 
+  -moz-user-select:none; 
+  -webkit-user-select:none; 
+  -o-user-select:none; 
+  user-select:none; 
+  display:inline-block; 
+  font-weight:bold; 
+  text-align:center; 
+  text-decoration:none; 
+  font-family:sans-serif; 
+  background:rgb(255,78,0); 
+  color:rgb(255, 255, 255); 
+  border:2px solid rgb(127,39,0); 
+  text-shadow:0px -1px rgb(76,23,0); 
+  line-height:1.5em; 
+  padding:5px 10px; 
+border: none;
+text-shadow: none;}
+a#cta_button_391263_e7d963b6-0702-4e31-86d2-43d2899a42d1:hover {
+background:rgb(255,85,0); 
+color:rgb(255,255,255); 
+}
+a#cta_button_391263_e7d963b6-0702-4e31-86d2-43d2899a42d1:active, #cta_button_391263_e7d963b6-0702-4e31-86d2-43d2899a42d1:active:hover {
+background:rgb(204,62,0); 
+color:rgb(244,244,244); 
+}
+
+</style>
+  <!-- set the character set -->
+  
+  <!-- tell IE to use latest version and chrome frame if available -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  
+    <title>Node.js Tutorial - How to Use Request Module</title>
+    <meta name="title" content="Node.js Tutorial - How to Use Request Module">
+    <meta name="description" content="In this tutorial we will learn about how to get started with the request module to perform HTTP calls.">
+  
+
+  <!-- verifications -->
+  <meta name="pocket-site-verification" content="5e72b5116252f6580e6c4d930dc9f7">
+
+  <link rel="alternate" type="application/rss+xml" href="http://blog.modulus.io/rss.xml" title="Modulus Blog RSS Feed">
+
+  <!-- favicon -->
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="http://blog.modulus.io/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://blog.modulus.io/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://blog.modulus.io/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://blog.modulus.io/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="http://blog.modulus.io/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://blog.modulus.io/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://blog.modulus.io/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://blog.modulus.io/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="http://blog.modulus.io/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="http://blog.modulus.io/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="http://blog.modulus.io/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="http://blog.modulus.io/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="http://blog.modulus.io/favicon-128.png" sizes="128x128">
+  <meta name="application-name" content="&nbsp;">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-TileImage" content="mstile-144x144.png">
+  <meta name="msapplication-square70x70logo" content="mstile-70x70.png">
+  <meta name="msapplication-square150x150logo" content="mstile-150x150.png">
+  <meta name="msapplication-wide310x150logo" content="mstile-310x150.png">
+  <meta name="msapplication-square310x310logo" content="mstile-310x310.png">
+
+  <!-- include basic style sheet -->
+  <link rel="stylesheet" href="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/style.css">
+
+  <!-- fb meta -->
+  <meta property="fb:app_id" content="225838904187583">
+  <meta name="medium" content="blog">
+
+  <!-- twitter meta -->
+  <meta property="twitter:account_id" content="559010724">
+
+  
+  <meta property="og:url" content="http://blog.modulus.io/node.js-tutorial-how-to-use-request-module">
+  <meta property="og:title" content="Node.js Tutorial - How to Use Request Module">
+  <meta property="og:description" content="In this tutorial we will learn about how to get started with the request module to perform HTTP calls.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@OnModulus">
+  <meta name="twitter:creator" content="">
+  <meta name="twitter:title" content="Node.js Tutorial - How to Use Request Module">
+  <meta name="twitter:description" content="In this tutorial we will learn about how to get started with the request module to perform HTTP calls.">
+  
+
+  <!-- analytics -->
+  <script type="text/javascript" async="" src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/analytics.js"></script><script async="" src="//connect.facebook.net/en_US/fbevents.js"></script><script type="text/javascript" async="" src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/analytics.txt"></script><script id="sendgrid-subscription-widget-js" src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/widget.txt"></script><script async="" src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/fbevents.txt"></script><script id="hs-analytics" src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/391263.txt"></script><script type="text/javascript" id="analytics-js" async="" src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/analytics_002.txt"></script><script type="text/javascript">
+  window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
+  window.analytics.load("43nt890g2y");
+  window.analytics.page();
+  </script>
+  <!-- Start of Async HubSpot Analytics Code -->
+  <script type="text/javascript">
+    (function(d,s,i,r) {
+      if (d.getElementById(i)){return;}
+      var n=d.createElement(s),e=d.getElementsByTagName(s)[0];
+      n.id=i;n.src='//js.hs-analytics.net/analytics/'+(Math.ceil(new Date()/r)*r)+'/391263.js';
+      e.parentNode.insertBefore(n, e);
+    })(document,"script","hs-analytics",300000);
+  </script>
+<!-- End of Async HubSpot Analytics Code -->
+<script charset="utf-8" src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/current.txt"></script>
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '1663140523944227');
+  fbq('track', "PageView");
+</script>
+<noscript>
+  &lt;img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1663140523944227&amp;ev=PageView&amp;noscript=1"
+/&gt;
+</noscript>
+<!-- End Facebook Pixel Code -->
+<script type="text/javascript" async="" src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/embed.txt"></script><script type="text/javascript" async="" src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/loader-v2_002.txt"></script><script type="text/javascript" async="" src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/loader-v2.txt"></script><link id="sendgrid-subscription-widget-css" rel="stylesheet" type="text/css" href="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/widget.css"><script src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/st_insights.txt" id="st_insights_js"></script><script type="text/javascript" async="" src="//modulusblog.disqus.com/embed.js"></script><script type="text/javascript" async="" src="file:///ctas/v2/public/cs/loader-v2.js?pg=323db9fa-3fc4-4db3-a99c-b2f72f01f09f&amp;pid=391263&amp;canon=file%3A%2F%2F%2FC%3A%2FUsers%2FUFUMES%2FDesktop%2Fandela%2520assignment%2Fday%2520A%2Ftutorial%2FNode.js%2520Tutorial%2520-%2520How%2520to%2520Use%2520Request%2520Module.html&amp;__hssc=&amp;__hstc=&amp;__hsfp=&amp;utm_referrer=&amp;lag=15482&amp;rdy=1&amp;ae=1&amp;sv=static-1.75"></script><script type="text/javascript" async="" src="file:///ctas/v2/public/cs/loader-v2.js?pg=9b86a76f-ae0d-4275-8d13-b0bd7bddf10b&amp;pid=391263&amp;canon=file%3A%2F%2F%2FC%3A%2FUsers%2FUFUMES%2FDesktop%2Fandela%2520assignment%2Fday%2520A%2Ftutorial%2FNode.js%2520Tutorial%2520-%2520How%2520to%2520Use%2520Request%2520Module.html&amp;__hssc=&amp;__hstc=&amp;__hsfp=&amp;utm_referrer=&amp;lag=15485&amp;rdy=1&amp;ae=1&amp;sv=static-1.75"></script></head>
+<body>
+<div id="main">
+  <header>
+  <div id="header-bg"></div>
+  <h1 id="logo">
+    <a href="http://blog.modulus.io/?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958" title="Modulus Blog Home"><img src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/modulus-logoSmall-gray.png" alt="Modulus"></a>
+  </h1>
+  <div class="tagline left">
+    <img src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/PRGS-Tag-gray.png">
+  </div>
+  
+  <div class="search-top right">
+    <form action="http://blog.modulus.io/search" method="GET" class="search-form">
+  
+  <input placeholder="search term" name="q" type="text">
+  
+  <button type="submit" class="btn-important"><i class="icon icon-search"></i></button>
+</form>
+  </div>
+  
+</header>
+
+  <div id="content" class="col content-col">
+    
+<div class="post-info">
+  <div class="date">February 4, 2015</div>
+  <div class="author"><a rel="author" href="https://twitter.com/@KushalLikhi" target="_blank">Kushal Likhi</a></div>
+  
+  <div class="author"><a rel="twitter" href="https://twitter.com/@KushalLikhi" title="Kushal Likhi's Twitter Account" target="_blank">@KushalLikhi</a></div>
+  
+</div>
+<article class="post full">
+  <h1 class="title">Node.js Tutorial - How to Use Request Module</h1>
+  
+<ul class="tags">
+  
+  <li class="post-tag"><a href="http://blog.modulus.io/tag/node.js?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">node.js</a></li>
+  
+  <li class="post-tag"><a href="http://blog.modulus.io/tag/http?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">http</a></li>
+  
+  <li class="post-tag"><a href="http://blog.modulus.io/tag/modulus?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">modulus</a></li>
+  
+</ul>
+
+  <img src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/8d0435f21a9d79e877047aa6f16666970b816543_reqmodule-banner-1.png" alt="Node.js Tutorial - How to Use Request Module" width="620" height="180">
+  <div class="text">
+    <p>In any application framework one basic need is to be able to make REST calls over <em>HTTP/HTTPS, </em>they are widely used and very useful in cases of API interactions and web scraping. We can use the Node.js core modules<em> http</em> or <em>https</em> to perform these calls but that that can be a cumbersome process and the<em> Request</em> module makes it simple to perform these <em>HTTP</em> requests. In this tutorial we will learn about how to get started with the <em>request</em> module to perform <em>HTTP</em> calls.</p><h2>Installing Request Module</h2><p><a href="https://www.npmjs.com/package/request">Request</a><em> is a t</em>hird party module, hence in order to install the request module, simply run the following command in your project directory:</p><pre><code data-language="shell" class="rainbow"><span class="keyword operator">&gt;</span> npm install request</code></pre><p>If you’re unaware, <a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;cad=rja&amp;uact=8&amp;ved=0CB4QFjAA&amp;url=https%3A%2F%2Fwww.npmjs.com%2F&amp;ei=VH3SVOmcIpCWyAS5sYDQBQ&amp;usg=AFQjCNHcRudvKKNX4eMuQBtERCMyaPp85w&amp;sig2=ji_MDxc3mE7jjnU3219KHQ&amp;bvm=bv.85076809,d.aWw">npm</a><em> is</em>
+ a package manager, which provides a central repository for custom open 
+source modules for Node.js and JavaScript. npm makes it simple to manage
+ modules versions and distribution. We used the npm<em> install co</em>mmand to install the required module in our project.</p><h2>Getting started with the Request Module</h2><p>The<em> Request</em> module is built in a way that it makes it very simple to make <em>HTTP(S)</em>
+ calls. It also follows redirects by default, however that is 
+configurable. In this section we will use shorthand notations of the <em>request</em> module to get our job done.</p><h3>Simple GET call over HTTP</h3><p>Lets try to print the <em>HTML</em> off the modulus.io homepage by making a GET request to the <em>modulus.io</em> homepage URL:</p><pre><code data-language="javascript" class="rainbow"><span class="comment">//Load the request module</span>
+<span class="keyword">var</span> request <span class="keyword operator">=</span> <span class="function call">require</span>(<span class="string">'request'</span>);</code></pre><pre>//Lets try to make a HTTP GET request to modulus.io's website.
+request('http://www.modulus.io', function (error, response, body) {
+    if (!error &amp;&amp; response.statusCode == 200) {
+        console.log(body); // Show the HTML for the Modulus homepage.
+    }
+});</pre><p>In the above example we did not specify the <em>GET</em> method anywhere but by default the request module makes a <em>GET</em> request, if not specified explicitly. Alternatively, we can also use <em>request.get</em>, using<em> request.get</em> makes the code more readable.</p><p>The callback function contains three parameters:</p><ol><li><strong>Error:</strong> This is the first parameter of the callback function. It will be <em>null</em> in case there is no error or it will contain the error object with appropriate details. You should always check for the <em>error </em>before continuing to process the response.</li><li><strong>Response</strong>: This is the second parameter in the callback function. This contains the <em>http.IncomingMessage</em> object which contains additional data about the http/https request i.e status code, headers, etc.</li><li><strong>Body:</strong> This is the third parameter and contains the body of the http/https response. This is a <em>string</em> type containing the contents of the body if the response is in text format, the<em> body</em> is a <em>buffer</em> if the response data is in the <em>binary / octet stream</em> encoding, finally the<em> body</em> will be a <em>JSON</em> object if the response is in JSON encoding.</li></ol><h3>Simple GET call over HTTPS</h3><p>For making <em>HTTPS</em> calls the <em>request</em> module automatically detects from the URL and routes your request via <em>https</em> module internally. For making HTTPS calls all you have to do is, in the UEL specify the protocol as the <em>https</em>.  Below is an example of the HTTPS call:</p><pre><code data-language="javascript" class="rainbow"><span class="comment">//Load the request module</span>
+<span class="keyword">var</span> request <span class="keyword operator">=</span> <span class="function call">require</span>(<span class="string">'request'</span>);
+
+<span class="comment">//Lets try to make a HTTPS GET request to modulus.io's website.</span>
+<span class="comment">//All we did here to make HTTPS call is changed the `http` to `https` in URL.</span>
+<span class="function call">request</span>(<span class="string">'https://modulus.io'</span>, <span class="storage function">function</span> (error, response, body) {
+    <span class="comment">//Check for error</span>
+    <span class="keyword">if</span>(error){
+        <span class="keyword">return</span> console.<span class="support method">log</span>(<span class="string">'Error:'</span>, error);
+    }
+
+    <span class="comment">//Check for right status code</span>
+    <span class="keyword">if</span>(response.statusCode <span class="keyword operator">!</span><span class="keyword operator">=</span><span class="keyword operator">=</span> <span class="constant numeric">200</span>){
+        <span class="keyword">return</span> console.<span class="support method">log</span>(<span class="string">'Invalid Status Code Returned:'</span>, response.statusCode);
+    }
+
+    <span class="comment">//All is good. Print the body</span>
+    console.<span class="support method">log</span>(body); <span class="comment">// Show the HTML for the Modulus homepage.</span>
+
+});</code></pre><p>The<em> Request</em> module has some shortcut methods for making calls in common REST methods like P<em>OST, PUT or DELETE</em>, these notations are as follows:</p><ul><li><em>request.post </em>is for <em>POST</em> request.</li><li><em>request.put</em> is for <em>PUT </em>request.</li><li><em>request.delete</em> is for <em>DELETE</em> request.</li><li><em>request.post </em>is for <em>GET</em> request.</li><li><em>request.patch</em>  is for <em>PATCH</em> request.</li></ul><h2>Some More Configurations</h2><p>In
+ the previous section we discussed on how to make simple request calls 
+via quick shortcut methods. Here we will discuss another syntax where 
+you can configure the request per your needs.
+
+In place of a <em>string</em> URL, the request module also optionally takes a config object where we can pass the desired configurations. The syntax is: <em>request(optionsObject, callback)</em>. Lets see an example below:</p><pre><code data-language="javascript" class="rainbow"><span class="comment">//Load the request module</span>
+<span class="keyword">var</span> request <span class="keyword operator">=</span> <span class="function call">require</span>(<span class="string">'request'</span>);
+
+<span class="comment">//Lets configure and request</span>
+<span class="function call">request</span>({
+    url: 'http:<span class="comment">//modulus.io', //URL to hit</span>
+    qs: {from: <span class="string">'blog example'</span>, time: <span class="keyword operator">+</span><span class="keyword">new</span> <span class="function call">Date</span>()}, <span class="comment">//Query string data</span>
+    method: <span class="string">'GET'</span>, <span class="comment">//Specify the method</span>
+    headers: { <span class="comment">//We can define headers too</span>
+        <span class="string">'Content-Type'</span>: <span class="string">'MyContentType'</span>,
+        <span class="string">'Custom-Header'</span>: <span class="string">'Custom Value'</span>
+    }
+}, <span class="keyword">function</span>(error, response, body){
+    <span class="keyword">if</span>(error) {
+        console.<span class="support method">log</span>(error);
+    } <span class="keyword">else</span> {
+        console.<span class="support method">log</span>(response.statusCode, body);
+    }
+});</code></pre><p>In the above example you can see that we passed a 
+configuration object with various configurations, there is a huge list 
+of configurations, which you can use for your request. Here we just 
+demonstrated how you pass<em> headers </em>and <em>query</em> <em>data</em> as well as define the <em>HTTP method</em> explicitly.</p><h3>Posting a string body</h3><p>In this example we will see how we can post a <em>String</em> or <em>Buffer</em> body using the <em>request </em>module. In this example we will use the body configuration property for posting the data.</p><pre><code data-language="javascript" class="rainbow"><span class="comment">//Load the request module</span>
+<span class="keyword">var</span> request <span class="keyword operator">=</span> <span class="function call">require</span>(<span class="string">'request'</span>);
+
+<span class="comment">//Lets configure and request</span>
+<span class="function call">request</span>({
+    url: 'https:<span class="comment">//modulus.io/contact/demo', //URL to hit</span>
+    qs: {from: <span class="string">'blog example'</span>, time: <span class="keyword operator">+</span><span class="keyword">new</span> <span class="function call">Date</span>()}, <span class="comment">//Query string data</span>
+    method: <span class="string">'POST'</span>,
+    headers: {
+        <span class="string">'Content-Type'</span>: <span class="string">'MyContentType'</span>,
+        <span class="string">'Custom-Header'</span>: <span class="string">'Custom Value'</span>
+    },
+    body: <span class="string">'Hello Hello! String body!'</span> <span class="comment">//Set the body as a string</span>
+}, <span class="keyword">function</span>(error, response, body){
+    <span class="keyword">if</span>(error) {
+        console.<span class="support method">log</span>(error);
+    } <span class="keyword">else</span> {
+        console.<span class="support method">log</span>(response.statusCode, body);
+    }
+});</code></pre><h3>Posting as a form</h3><p>The<em> request</em> module has a helper configuration to post forms. You just need to pss the form data as an <em>object</em> to the <em>form</em> configuration property and it will automatically url-encode it and put it in the body with the desired <em>application/x-www-form-urlencoded</em> content type. Lets see an example below:</p><pre><code data-language="javascript" class="rainbow"><span class="comment">//Load the request module</span>
+<span class="keyword">var</span> request <span class="keyword operator">=</span> <span class="function call">require</span>(<span class="string">'request'</span>);
+
+<span class="comment">//Lets configure and request</span>
+<span class="function call">request</span>({
+    url: 'https:<span class="comment">//modulus.io/contact/demo', //URL to hit</span>
+    qs: {from: <span class="string">'blog example'</span>, time: <span class="keyword operator">+</span><span class="keyword">new</span> <span class="function call">Date</span>()}, <span class="comment">//Query string data</span>
+    method: <span class="string">'POST'</span>,
+    <span class="comment">//Lets post the following key/values as form</span>
+    form: {
+        field1: <span class="string">'data'</span>,
+        field2: <span class="string">'data'</span>
+    }
+}, <span class="keyword">function</span>(error, response, body){
+    <span class="keyword">if</span>(error) {
+        console.<span class="support method">log</span>(error);
+    } <span class="keyword">else</span> {
+        console.<span class="support method">log</span>(response.statusCode, body);
+    }
+});</code></pre><h3>Posting JSON data</h3><p>If we have an <em>object</em> and we want to post it as the <em>JSON</em> data we can do that by passing that object in the json configuration property. Lets see an example below:</p><pre><code data-language="javascript" class="rainbow"><span class="comment">//Load the request module</span>
+<span class="keyword">var</span> request <span class="keyword operator">=</span> <span class="function call">require</span>(<span class="string">'request'</span>);
+
+<span class="comment">//Lets configure and request</span>
+<span class="function call">request</span>({
+    url: 'https:<span class="comment">//modulus.io/contact/demo', //URL to hit</span>
+    qs: {from: <span class="string">'blog example'</span>, time: <span class="keyword operator">+</span><span class="keyword">new</span> <span class="function call">Date</span>()}, <span class="comment">//Query string data</span>
+    method: <span class="string">'POST'</span>,
+    <span class="comment">//Lets post the following key/values as form</span>
+    json: {
+        field1: <span class="string">'data'</span>,
+        field2: <span class="string">'data'</span>
+    }
+}, <span class="keyword">function</span>(error, response, body){
+    <span class="keyword">if</span>(error) {
+        console.<span class="support method">log</span>(error);
+    } <span class="keyword">else</span> {
+        console.<span class="support method">log</span>(response.statusCode, body);
+}
+});</code></pre><h2>Streams</h2><p>The<em> Request</em> module has a fantastic first citizen interface for <a href="http://nodejs.org/api/stream.html">Streams</a><em>. Strea</em>ms<em> are li</em>ke
+ a continuous flow of data from one source to a target. Using streams 
+can really save us memory as well as help us to work with large data. If
+ possible use of streami<em>ng API is rec</em>ommended. We will cover 
+some very basic streaming based approaches here, but this is just a 
+start. Streams have infinite possibilities. Lets consider an example; we
+ want to send a request for an image to a third party server and stream 
+the response to a file.</p><pre>//Load the request module
+var request = require('request');
+//Load fs module
+var fs = require('fs');</pre><pre>//Lets define a write stream for our destination file
+var destination = fs.createWriteStream('./savedImage.png');</pre><pre>//Lets save the modulus logo now
+request('https://my.modulus.io/img/modulus-logoSmall-gray20.png').pipe(destination);</pre><p>Here all we are doing is piping the <em>readStream</em> from the <em>request</em> we made to the write stream of our destination file. It's that simple. We can also listen to error events as described below:</p><pre>//Lets save the modulus logo now
+request('https://my.modulus.io/img/modulus-logoSmall-gray20.png')
+.pipe(destination)
+.on('error', function(error){
+    console.log(error);
+});</pre><h3>Sending data from a file to a request via streams</h3><p>We can also read data from a file and send it to a remote server via our request. Lets consider an example below:</p><pre>//Load the request module
+var request = require('request');
+//Load fs module
+var fs = require('fs');</pre><pre>//Lets define a read stream from our source file, it could be any JSON file.
+var source = fs.createReadStream('./sampleData.json');</pre><pre>//Let’s send our data via POST request
+source.pipe(request.post('https://modulus.io/contact/demo'));</pre><p>In this example we created a read stream from our source file and piped it to the request.</p><h2>Conclusion</h2><p>In
+ this tutorial we learned the basics of the request module. We saw how 
+we can use shorthand methods, custom configurations, as well as the 
+basics of the streaming API. For future reference, you can read more 
+detailed streams usage in the request module as well as some of its auth
+ features. For more detailed documentation and advanced features you can
+ reference the request module’s documentation <a href="https://github.com/request/request/blob/master/README.md">here</a>.</p>
+  </div>
+  <div class="modulus-info">
+  <h3>What is Modulus?</h3>
+  <p>Modulus makes deploying applications in the public cloud or your 
+own data center easy. Node.js, PHP, Java, Python, Nginx, and MongoDB 
+supported. Full Docker support included in Enterprise version. It’s free
+ to get started.</p>
+  <!--HubSpot Call-to-Action Code -->
+  <span class="hs-cta-wrapper" id="hs-cta-wrapper-323db9fa-3fc4-4db3-a99c-b2f72f01f09f">
+    <span class="hs-cta-node hs-cta-323db9fa-3fc4-4db3-a99c-b2f72f01f09f" id="hs-cta-323db9fa-3fc4-4db3-a99c-b2f72f01f09f" data-hs-drop="true" style="visibility: visible;"><a id="cta_button_391263_e7d963b6-0702-4e31-86d2-43d2899a42d1" class="cta_button modulus-sign-up-btn btn-important" href="http://cta-service-cms2.hubspot.com/ctas/v2/public/cs/c/?cta_guid=e7d963b6-0702-4e31-86d2-43d2899a42d1&amp;placement_guid=323db9fa-3fc4-4db3-a99c-b2f72f01f09f&amp;portal_id=391263&amp;redirect_url=APefjpHePpG6x_u6H7VXJBX3QxAepKeYqtbfAjVGFhYdAguVlWeX2MiE5c-WVS64tOLzbLXWIPNH65poaFZSL6Y9Ltf7kCy7jMivBoO42WqLnt7EIYTD9JzEx1yGwFl8NIoLtfZEVKnT&amp;hsutk=&amp;canon=http%3A%2F%2Fblog.modulus.io%2Fnode.js-tutorial-how-to-use-request-module&amp;__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958" style="" cta_dest_link="http://modulus.io/register?from=blog_bottom" title="SIGN UP AND GET $15"> <span style="font-family: helvetica;">SIGN UP AND GET $15</span> </a> </span>
+    <script type="text/javascript">
+      hbspt.cta.load(391263, '323db9fa-3fc4-4db3-a99c-b2f72f01f09f');
+    </script>
+  </span>
+  <!-- end HubSpot Call-to-Action Code -->
+</div>
+
+  <div class="post-share-buttons">
+  <h3>Share This Article</h3>
+  <div class="fb-share btn">
+    <a href="http://www.facebook.com/share.php?u=http://blog.modulus.io/node.js-tutorial-how-to-use-request-module&amp;title=Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module" target="_blank">
+      <i class="icon icon-facebook"></i>
+    </a>
+  </div>
+  <div class="twitter-share btn">
+    <a href="http://twitter.com/home?status=Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module%20http://blog.modulus.io/node.js-tutorial-how-to-use-request-module%20from%20@OnModulus%20blog" target="_blank">
+      <i class="icon icon-twitter-1"></i>
+    </a>
+  </div>
+  <div class="gp-share btn">
+    <a href="https://plus.google.com/share?url=http://blog.modulus.io/node.js-tutorial-how-to-use-request-module" target="_blank">
+      <i class="icon icon-gplus"></i>
+    </a>
+  </div>
+  <div class="linkedin-share btn">
+    <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://blog.modulus.io/node.js-tutorial-how-to-use-request-module&amp;title=Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module&amp;source=http://blog.modulus.io" target="_blank">
+      <i class="icon icon-linkedin"></i>
+    </a>
+  </div>
+  <div class="stumbleupon-share btn">
+    <a href="http://www.stumbleupon.com/submit?url=http://blog.modulus.io/node.js-tutorial-how-to-use-request-module&amp;title=Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module" target="_blank">
+      <i class="icon icon-stumbleupon"></i>
+    </a>
+  </div>
+  <div class="pocket-share btn">
+    <a href="https://getpocket.com/save?url=http://blog.modulus.io/node.js-tutorial-how-to-use-request-module&amp;title=Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module" target="_blank">
+      <i class="icon icon-pocket"></i>
+    </a>
+  </div>
+</div>
+  <div class="post-comments">
+  <div id="disqus_thread"><iframe id="dsq-app4" name="dsq-app4" allowtransparency="true" scrolling="no" tabindex="0" title="Disqus" src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/saved_resource.htm" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 541px !important;" width="100%" frameborder="0"></iframe><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" scrolling="no" tabindex="0" title="Disqus" src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/saved_resource2.htm" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 4721px !important;" horizontalscrolling="no" verticalscrolling="no" width="100%" frameborder="0"></iframe></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'modulusblog';
+    var disqus_identifier = 'node.js-tutorial-how-to-use-request-module';
+    var disqus_title = 'Node.js Tutorial - How to Use Request Module';
+    var disqus_url = 'http://blog.modulus.io/node.js-tutorial-how-to-use-request-module';
+
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+  
+</div>
+</article>
+
+<script type="text/javascript">
+  var _hsq = _hsq || [];
+  _hsq.push(["setContentType", "blog"]);
+</script>
+
+  </div>
+  <div id="sidebar" class="col sidebar-col">
+    
+
+
+<div class="sidebar-box">
+  <h4>About</h4>
+  <p>
+    <a href="http://modulus.io/?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">Modulus</a>
+ is a premier hosting platform that provides a complete technology stack
+ for application developers. Support for Node.js, PHP, Python, Java, and
+ Nginx out of the box. This includes custom SSL, WebSockets, MongoDB, 
+statistics, and more.
+  </p>
+  <p>
+    <!--HubSpot Call-to-Action Code -->
+    <span class="hs-cta-wrapper" id="hs-cta-wrapper-9b86a76f-ae0d-4275-8d13-b0bd7bddf10b">
+      <span class="hs-cta-node hs-cta-9b86a76f-ae0d-4275-8d13-b0bd7bddf10b" id="hs-cta-9b86a76f-ae0d-4275-8d13-b0bd7bddf10b" data-hs-drop="true" style="visibility: visible;"><a id="cta_button_391263_2b3961db-efe4-4a56-aa80-6e7a29269c49" class="cta_button modulus-sign-up-btn btn-important" href="http://cta-service-cms2.hubspot.com/ctas/v2/public/cs/c/?cta_guid=2b3961db-efe4-4a56-aa80-6e7a29269c49&amp;placement_guid=9b86a76f-ae0d-4275-8d13-b0bd7bddf10b&amp;portal_id=391263&amp;redirect_url=APefjpFMXLSaTH3CkchcVhB5aFpXxWFP0Am41WrWpJ9mPCMtk4BR0h0l7_ymir0qzTY74jozQ2oxd0WDPBb6ZpCVn84vLKHh9qFHwvr38uSnR5nhkYeVdpQ&amp;hsutk=&amp;canon=http%3A%2F%2Fblog.modulus.io%2Fnode.js-tutorial-how-to-use-request-module&amp;__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958" style="" cta_dest_link="http://modulus.io/register" title="GET STARTED FOR FREE"> <span style="font-family: helvetica;">GET STARTED FOR FREE</span> </a> </span>
+      <script type="text/javascript">
+        hbspt.cta.load(391263, '9b86a76f-ae0d-4275-8d13-b0bd7bddf10b');
+      </script>
+    </span>
+    <!-- end HubSpot Call-to-Action Code -->
+  </p>
+</div>
+<div class="sidebar-box">
+  <h4>Tags</h4>
+  <hr>
+  <ul class="tags">
+    
+    <li><a href="http://blog.modulus.io/tag/Modulator?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">Modulator</a></li>
+    
+    <li><a href="http://blog.modulus.io/tag/interns?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">interns</a></li>
+    
+    <li><a href="http://blog.modulus.io/tag/modules?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">modules</a></li>
+    
+    <li><a href="http://blog.modulus.io/tag/database?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">database</a></li>
+    
+    <li><a href="http://blog.modulus.io/tag/nielsen?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">nielsen</a></li>
+    
+    <li><a href="http://blog.modulus.io/tag/retrium?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">retrium</a></li>
+    
+    <li><a href="http://blog.modulus.io/tag/progress?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">progress</a></li>
+    
+    <li><a href="http://blog.modulus.io/tag/meteorchef?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">meteorchef</a></li>
+    
+    <li><a href="http://blog.modulus.io/tag/iojs?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">iojs</a></li>
+    
+    <li><a href="http://blog.modulus.io/tag/startup?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">startup</a></li>
+    
+    <li><a href="http://blog.modulus.io/tag/Django?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">Django</a></li>
+    
+    <li><a href="http://blog.modulus.io/tag/conference?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">conference</a></li>
+    
+    <li><a href="http://blog.modulus.io/tag/features?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">features</a></li>
+    
+    <li><a href="http://blog.modulus.io/tag/habitat?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">habitat</a></li>
+    
+    <li><a href="http://blog.modulus.io/tag/internet%20of%20things?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">internet of things</a></li>
+    
+  </ul>
+</div>
+
+<div class="sidebar-box related-posts">
+  <h4>Related Posts</h4>
+  <ul>
+    
+    <li><a href="http://blog.modulus.io/express?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958" alt="Read more about Express Video Tutorial">Express Video Tutorial</a></li>
+    
+    <li><a href="http://blog.modulus.io/nodejs-and-hapi-create-rest-api?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958" alt="Read more about Node.js and Hapi - Creating a REST API">Node.js and Hapi - Creating a REST API</a></li>
+    
+    <li><a href="http://blog.modulus.io/install-nodejs-and-iojs-together-safely?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958" alt="Read more about Install Node.js and io.js Together (safely)">Install Node.js and io.js Together (safely)</a></li>
+    
+    <li><a href="http://blog.modulus.io/build-your-first-http-server-in-nodejs?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958" alt="Read more about Build Your First HTTP Server in Node.js">Build Your First HTTP Server in Node.js</a></li>
+    
+    <li><a href="http://blog.modulus.io/using-tests-to-document-a-nodejs-module?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958" alt="Read more about Using Tests to Document a Node.js Module">Using Tests to Document a Node.js Module</a></li>
+    
+  </ul>
+</div>
+
+<div class="sidebar-box newsletter-signup">
+  <h4>Newsletter Signup</h4>
+  <p>The Modulus monthly newsletter brings you exclusive content only 
+available to subscribers and the best Node.js material from around the 
+web.</p>
+  <div class="sendgrid-subscription-widget" data-token="%2Bmx%2FH8D%2F9MBnq%2BlruwsEFibvBc777n7t%2B7TREcCzLWQE2gN%2Fwq6Psij4iGvKh2U%2F" data-executed="true"><form><div class="response"></div><label><span>Email</span><input name="email" placeholder="you@example.com" type="email"></label><input value="Subscribe" type="submit"></form></div>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://s3.amazonaws.com/subscription-cdn/0.2/widget.min.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "sendgrid-subscription-widget-js");</script>
+</div>
+<div class="sidebar-box contact">
+  <h4>Contact Us</h4>
+  <div class="twitter contact-item">
+    <a href="http://www.twitter.com/OnModulus" target="_blank">
+      <i class="icon icon-twitter-1"></i>
+      <span class="text">@OnModulus</span>
+    </a>
+  </div>
+  <div class="facebook contact-item">
+    <a href="http://www.facebook.com/OnModulus" target="_blank">
+      <i class="icon icon-facebook-1"></i>
+      <span class="text">facebook.com/OnModulus</span>
+    </a>
+  </div>
+  <div class="multiline irc contact-item">
+    <a href="http://irc-5518.onmodulus.net/" target="_blank">
+      <i class="icon icon-comment"></i>
+      <span class="text">IRC Chat<br>#Modulus<br>irc.freenode.net</span>
+    </a>
+  </div>
+  <div class="googlegroup contact-item">
+    <a href="https://groups.google.com/d/forum/onmodulus" target="_blank">
+      <i class="icon icon-users"></i>
+      <span class="text">Modulus Google Group</span>
+    </a>
+  </div>
+  <div class="email contact-item">
+    <a href="mailto:feedback@modulus.io" target="_blank">
+      <i class="icon icon-gmail"></i>
+      <span class="text">feedback@modulus.io</span>
+    </a>
+  </div>
+</div>
+
+  </div>
+  <footer>
+  <div>© <a href="http://modulus.io/?__hstc=753710.d6d3f978ce807ee6197852132f5625f5.1476889705596.1476889705596.1476889705596.1&amp;__hssc=753710.1.1476889705607&amp;__hsfp=2444617958">Modulus</a> 2014</div>
+</footer>
+
+</div>
+<script src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/all.txt"></script>
+<script data-cfasync="false" type="text/javascript" src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/511d3e675579891447c334cae38a7f37.txt" async="async"></script>
+
+
+<iframe style="display: none;" src="Node.js%20Tutorial%20-%20How%20to%20Use%20Request%20Module_files/saved_resource3.htm"></iframe></body></html>

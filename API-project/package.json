@@ -1,0 +1,19 @@
+{
+  "name": "aaa",
+  "version": "1.0.0",
+  "description": "app for reading and writing to medium",
+  "main": "mystory.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ufumes/day-2-tasks/tree/master/API-project"
+  },
+  "keywords": [
+    "api",
+    "testing"
+  ],
+  "author": "umeoguaju francis",
+  "license": "SEE LICENCE IN LICENCE.TXT"
+}

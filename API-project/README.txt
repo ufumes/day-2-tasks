@@ -1,4 +1,4 @@
-API Documentation
+API Documentation for the sample webclient that consumes a public API service
 
 This Api was built from the medium's Api documentation accessible via (https://github.com/Medium/medium-api-docs). 
 

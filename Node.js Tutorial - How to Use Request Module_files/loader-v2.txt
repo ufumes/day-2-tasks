@@ -1,0 +1,94 @@
+(function() {
+
+    var __hs_cta_json = {"css":"a#cta_button_391263_2b3961db-efe4-4a56-aa80-6e7a29269c49 {\n  -webkit-font-smoothing:antialiased; \n  cursor:pointer; \n  -moz-user-select:none; \n  -webkit-user-select:none; \n  -o-user-select:none; \n  user-select:none; \n  display:inline-block; \n  font-weight:bold; \n  text-align:center; \n  text-decoration:none; \n  font-family:sans-serif; \n  background:rgb(255,78,0); \n  color:rgb(255, 255, 255); \n  border:2px solid rgb(127,39,0); \n  text-shadow:0px -1px rgb(76,23,0); \n  line-height:1.5em; \n  padding:5px 10px; \nborder: none;\ntext-shadow: none;}\na#cta_button_391263_2b3961db-efe4-4a56-aa80-6e7a29269c49:hover {\nbackground:rgb(255,85,0); \ncolor:rgb(255,255,255); \n}\na#cta_button_391263_2b3961db-efe4-4a56-aa80-6e7a29269c49:active, #cta_button_391263_2b3961db-efe4-4a56-aa80-6e7a29269c49:active:hover {\nbackground:rgb(204,62,0); \ncolor:rgb(244,244,244); \n}\n\n","image":false,"_id":"false","raw_html":"<a id=\"cta_button_391263_2b3961db-efe4-4a56-aa80-6e7a29269c49\" class=\"cta_button modulus-sign-up-btn btn-important\" href=\"//cta-service-cms2.hubspot.com/ctas/v2/public/cs/c/?cta_guid=2b3961db-efe4-4a56-aa80-6e7a29269c49&placement_guid=9b86a76f-ae0d-4275-8d13-b0bd7bddf10b&portal_id=391263&redirect_url=APefjpFMXLSaTH3CkchcVhB5aFpXxWFP0Am41WrWpJ9mPCMtk4BR0h0l7_ymir0qzTY74jozQ2oxd0WDPBb6ZpCVn84vLKHh9qFHwvr38uSnR5nhkYeVdpQ&hsutk=&canon=http%3A%2F%2Fblog.modulus.io%2Fnode.js-tutorial-how-to-use-request-module\"  style=\"/*hs-extra-styles*/\" cta_dest_link=\"http://modulus.io/register\" title=\"GET STARTED FOR FREE\"> <span style=\"font-family: helvetica;\">GET STARTED FOR FREE</span> </a> ","image_html":"<a id=\"cta_button_391263_2b3961db-efe4-4a56-aa80-6e7a29269c49\" class=\"cta_button\" href=\"//cta-service-cms2.hubspot.com/ctas/v2/public/cs/c/?cta_guid=2b3961db-efe4-4a56-aa80-6e7a29269c49&placement_guid=9b86a76f-ae0d-4275-8d13-b0bd7bddf10b&portal_id=391263&redirect_url=APefjpFMXLSaTH3CkchcVhB5aFpXxWFP0Am41WrWpJ9mPCMtk4BR0h0l7_ymir0qzTY74jozQ2oxd0WDPBb6ZpCVn84vLKHh9qFHwvr38uSnR5nhkYeVdpQ&hsutk=&canon=http%3A%2F%2Fblog.modulus.io%2Fnode.js-tutorial-how-to-use-request-module\"  cta_dest_link=\"http://modulus.io/register\"> <img id=\"hs-cta-img-9b86a76f-ae0d-4275-8d13-b0bd7bddf10b\" class=\"hs-cta-img modulus-sign-up-btn btn-important\" style=\"border-width: 0px; /*hs-extra-styles*/\" mce_noresize=\"1\" alt=\"GET STARTED FOR FREE\" src=\"http://cdn2.hubspot.net/hubshot/14/09/15/f88f367b-e326-497f-9438-a581699414ea.png\" /> </a> ","is_image":false,"_class":"hs-cta-9b86a76f-ae0d-4275-8d13-b0bd7bddf10b"};
+    var __hs_cta = {};
+
+    __hs_cta.drop = function() {
+        var is_legacy = document.getElementById('hs-cta-ie-element') && true || false,
+            html = __hs_cta_json.image_html,
+            tags = __hs_cta.getTags(),
+            is_image = __hs_cta_json.is_image,
+            parent, _style;
+
+        if (!is_legacy && !is_image) {
+            parent = (document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]);
+
+            _style = document.createElement('style');
+            parent.insertBefore(_style, parent.childNodes[0]);
+            try {
+                default_css = ".hs-cta-wrapper p, .hs-cta-wrapper div { margin: 0; padding: 0; }";
+                cta_css = default_css + " " + __hs_cta_json.css;
+                // http://blog.coderlab.us/2005/09/22/using-the-innertext-property-with-firefox/
+                _style[document.all ? 'innerText' : 'textContent'] = cta_css;
+            } catch (e) {
+                // addressing an ie9 issue
+                _style.styleSheet.cssText = cta_css;
+            }
+
+            html = __hs_cta_json.raw_html;
+        }
+
+        for (var i = 0; i < tags.length; ++i) {
+
+            var tag = tags[i];
+            var images = tag.getElementsByTagName('img');
+            var cssText = "";
+            var align = "";
+            for (var j = 0; j < images.length; j++) {
+                align = images[j].align;
+                images[j].style.border = '';
+                images[j].style.display = '';
+                cssText = images[j].style.cssText;
+            }
+
+            if (align == "right") {
+                tag.style.display = "block";
+                tag.style.textAlign = "right";
+            } else if (align == "middle") {
+                tag.style.display = "block";
+                tag.style.textAlign = "center";
+            }
+
+            tag.innerHTML = html.replace('/*hs-extra-styles*/', cssText);
+            tag.style.visibility = 'visible';
+            tag.setAttribute('data-hs-drop', 'true');
+            window.hbspt && hbspt.cta && hbspt.cta.afterLoad && hbspt.cta.afterLoad();
+        }
+
+        return tags;
+    };
+
+    __hs_cta.getTags = function() {
+        var allTags, check, i, divTags, spanTags,
+            tags = [];
+            if (document.getElementsByClassName) {
+                allTags = document.getElementsByClassName(__hs_cta_json._class);
+                check = function(ele) {
+                    return (ele.nodeName == 'DIV' || ele.nodeName == 'SPAN') && (!ele.getAttribute('data-hs-drop'));
+                };
+            } else {
+                allTags = [];
+                divTags = document.getElementsByTagName("div");
+                spanTags = document.getElementsByTagName("span");
+                for (i = 0; i < spanTags.length; i++) {
+                    allTags.push(spanTags[i]);
+                }
+                for (i = 0; i < divTags.length; i++) {
+                    allTags.push(divTags[i]);
+                }
+
+                check = function(ele) {
+                    return (ele.className.indexOf(__hs_cta_json._class) > -1) && (!ele.getAttribute('data-hs-drop'));
+                };
+            }
+            for (i = 0; i < allTags.length; ++i) {
+                if (check(allTags[i])) {
+                    tags.push(allTags[i]);
+                }
+            }
+        return tags;
+    };
+
+    // need to do a slight timeout so IE has time to react
+    setTimeout(__hs_cta.drop, 10);
+}());
